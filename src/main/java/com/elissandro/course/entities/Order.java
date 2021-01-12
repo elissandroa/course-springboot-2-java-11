@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.elissandro.course.entities.enums.OrderStatus;
+
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable{
@@ -24,6 +26,8 @@ public class Order implements Serializable{
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant moment;
 	
+	private Integer orderStatus;
+	
 	@ManyToOne
 	@JoinColumn(name ="client_id")
 	private User user;
@@ -31,9 +35,10 @@ public class Order implements Serializable{
 	public Order() {
 	}
 
-	public Order(Long id, Instant moment, User user) {
+	public Order(Long id, Instant moment, User user, OrderStatus orderStatus) {
 		this.moment = moment;
 		this.user = user;
+		setOrderStatus(orderStatus);
 	}
 
 	public Long getId() {
@@ -50,6 +55,17 @@ public class Order implements Serializable{
 
 	public void setMoment(Instant moment) {
 		this.moment = moment;
+	}
+
+
+	public OrderStatus getOrderStatus() {
+		return OrderStatus.valueOf(orderStatus);
+	}
+
+	public void setOrderStatus(OrderStatus orderStatus) {
+		if(orderStatus != null) {
+		this.orderStatus = orderStatus.getCode();
+		}
 	}
 
 	public User getUser() {
