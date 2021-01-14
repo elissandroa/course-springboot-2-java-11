@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.elissandro.course.entities.Category;
-import com.elissandro.course.entities.User;
 import com.elissandro.course.services.CategoryService;
 
 @RestController
